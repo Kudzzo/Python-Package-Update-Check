@@ -1,13 +1,13 @@
 import requests
 import parser
 
-pkg_list = parser.parse()
-pkg_dict = {}
-data_list = []
+error_list = []
 
-def fetch(pkg):
+def fetch():
+    pkg_list = parser.parse()
+    pkg_dict = {}
 
-    for Package in pkg:
+    for Package in pkg_list:
             try:
                 r = requests.get(f"https://pypi.org/pypi/{Package}/json", timeout=10)
                 r.raise_for_status()
@@ -16,18 +16,20 @@ def fetch(pkg):
                 pkg_dict.update({
                      
                     data["info"]["name"]: {
-                        data["info"]["version"],
-                        data["info"]["requires_python"]
+                        "version": data["info"]["version"],
+                        "requires_python": data["info"]["requires_python"]
                     },
                 })
 
                 
 
-            except requests.exceptions.HTTPError as e:
-                print(f"Package not found In Pypi. PKG: --> {Package}")
+            except Exception as e:
+                print(f"Error: {e}",f"PKG: --> {Package}")
+                error_list.append(Package)
+                
 
-    data_list.append(pkg_dict)
+    return error_list, pkg_dict
 
 if __name__ == "__main__":
-    fetch(pkg_list)
-    print(data_list)
+    fetch()
+    print(error_list)
