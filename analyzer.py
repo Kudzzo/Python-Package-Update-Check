@@ -1,7 +1,3 @@
-import fetcher
-
-error_list, pkg_dict = fetcher.fetch()
-
 def analyze(Packagedict: dict, ErrorList: list) -> dict:
     report = {}
 
@@ -19,7 +15,7 @@ def analyze(Packagedict: dict, ErrorList: list) -> dict:
             "Flags": flags
         }
 
-    for idx, errors in enumerate(error_list):
+    for idx, errors in enumerate(ErrorList):
         report[errors] = {
             "Status": "MISSING/INVALID",
             "Index": idx,
@@ -31,6 +27,3 @@ def analyze(Packagedict: dict, ErrorList: list) -> dict:
     print(report)
 
     return report
-
-if __name__ == "__main__":
-    analyze(Packagedict=pkg_dict, ErrorList=error_list)

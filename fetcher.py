@@ -2,12 +2,11 @@ import requests
 import parser
 
 error_list = []
+pkg_dict = {}
 
-def fetch():
-    pkg_list = parser.parse()
-    pkg_dict = {}
+def fetch(Packagelist: list):
 
-    for Package in pkg_list:
+    for Package in Packagelist:
             try:
                 r = requests.get(f"https://pypi.org/pypi/{Package}/json", timeout=10)
                 r.raise_for_status()
@@ -29,7 +28,3 @@ def fetch():
                 
 
     return error_list, pkg_dict
-
-if __name__ == "__main__":
-    fetch()
-    print(error_list)
