@@ -27,4 +27,4 @@ def fetch(Packagelist: list):
                 error_list.append(Package)
                 
 
-    return error_list, pkg_dict
+    return pkg_dict, error_list
