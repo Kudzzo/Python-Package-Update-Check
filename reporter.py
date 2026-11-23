@@ -6,7 +6,7 @@ def GenerateReport(ReportDict: dict, ErrorList: list ,outDir: str = " "):
     targetDir.mkdir(parents=True, exist_ok=True)
 
     warnings = [name for name, info in ReportDict.items() if info.get("Status") == "WARNING"]
-    print(f"Audited: {len(ReportDict)} packages | Warnings: {len(warnings)} | Missing/Invalid: {len(ErrorList)}")
+    print(f"\nAudited: {len(ReportDict)} packages | Warnings: {len(warnings)} | Missing/Invalid: {len(ErrorList)}")
     if ErrorList:
         print("Missing/Invalid Packages: ", ",".join(ErrorList))
 
