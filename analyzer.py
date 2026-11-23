@@ -24,6 +24,6 @@ def analyze(Packagedict: dict, ErrorList: list) -> dict:
             "flags": ["not_found_or_invalid_package"]
         }
 
-    print(report)
+    #print(report)
 
     return report
