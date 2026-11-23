@@ -1,13 +1,5 @@
 import json
 from pathlib import Path
-import fetcher
-import analyzer
-import parser
-
-Packagelist = parser.parse()
-error_list, pkg_dict = fetcher.fetch(Packagelist)
-report = analyzer.analyze(pkg_dict, error_list)
-
 
 def GenerateReport(ReportDict: dict, ErrorList: list ,outDir: str = " "):
     targetDir = Path(outDir)
@@ -45,5 +37,3 @@ def GenerateReport(ReportDict: dict, ErrorList: list ,outDir: str = " "):
 
     (targetDir / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-if __name__ == "__main__":
-    GenerateReport(report, error_list, "/home/kudzz/Documents/Programming-Projects/Python/GIT/PY-pkg-updt-check/")
